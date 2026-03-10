@@ -3,7 +3,7 @@
 <p align="center">
 📄 <a href="https://doi.org/10.1016/j.inffus.2026.104210">Paper</a> 
 &nbsp; | &nbsp;
-💻 <a href="https://github.com/Ethylyikes/DAE">Code</a>
+💻 <a href="https://github.com/Ethylyikes/LatentGeo/tree/main">Code</a>
 &nbsp; | &nbsp;
 🤗<a href="https://github.com/Ethylyikes/DAE">Benchmark</a>
 
