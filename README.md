@@ -21,13 +21,9 @@ LatentGeo/
     └── data/example.json
 ```
 
-## 🤗 Benchmark Dataset (Placeholder)
+## 🤗 Benchmark Dataset
 
 - HuggingFace link placeholder: `https://huggingface.co/datasets/<YOUR_ORG>/<YOUR_BENCHMARK_NAME>`
-- Replace `<YOUR_ORG>/<YOUR_BENCHMARK_NAME>` with your real dataset path later.
-- Default benchmark data paths:
-  - `Geoaux/data/geoaux.json`
-  - `Geoaux/data/image/`
 
 ## 🧪 SFT
 
