@@ -40,7 +40,7 @@ LatentGeo/
 ### 1) Environment and Dependencies
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/SFT
+cd /LatentGeo/SFT
 conda create -n sft_env python=3.10 -y
 conda activate sft_env
 
@@ -75,7 +75,7 @@ Example format:
 ### 3) Training
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/SFT
+cd /LatentGeo/SFT
 bash train.sh
 ```
 
@@ -87,7 +87,7 @@ bash train.sh
   - `TEXT_PROMPT`
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/SFT
+cd /LatentGeo/SFT
 python src/single_inference.py
 ```
 
@@ -96,7 +96,7 @@ python src/single_inference.py
 ### 1) Environment and Dependencies
 
 ```bash
-cd /Users/ethyl/code/LatentGeo
+cd /LatentGeo
 conda create -n rl_env python=3.10 -y
 conda activate rl_env
 
@@ -109,7 +109,7 @@ pip install -r requirementsForRL.txt
 - Start training:
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/RL
+cd /LatentGeo/RL
 bash jobs.sh
 ```
 
@@ -118,7 +118,7 @@ bash jobs.sh
 ### 1) Environment and Dependencies
 
 ```bash
-cd /Users/ethyl/code/LatentGeo
+cd /LatentGeo
 conda create -n rl_eval_env python=3.10 -y
 conda activate rl_eval_env
 
@@ -131,7 +131,7 @@ pip install -r requirementsForRLEval.txt
 - For API-based evaluation, set your API key first (in shell or `.env`)
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/VLMEvalKit
+cd /LatentGeo/VLMEvalKit
 bash jobs.sh
 ```
 
@@ -140,7 +140,7 @@ bash jobs.sh
 ### 1) Environment and Dependencies
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/Geoaux
+cd /LatentGeo/Geoaux
 conda create -n geoaux_env python=3.10 -y
 conda activate geoaux_env
 
@@ -153,7 +153,7 @@ pip install torch transformers openai pyyaml tqdm pillow python-Levenshtein pand
 Local model:
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/Geoaux
+cd /LatentGeo/Geoaux
 python scripts/run_infer.py \
   --model_key qwen2.5-vl \
   --model_path Qwen/Qwen2.5-VL-7B-Instruct \
@@ -163,7 +163,7 @@ python scripts/run_infer.py \
 API model:
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/Geoaux
+cd /LatentGeo/Geoaux
 python scripts/run_infer.py \
   --model_key api \
   --model_path qwen-plus \
@@ -189,7 +189,7 @@ export DASHSCOPE_MODEL="qwen-plus"
 End-to-end (extract + score):
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/Geoaux
+cd /LatentGeo/Geoaux
 python scripts/run_eval.py \
   --input_file ./output/model_results.json \
   --smart --use_judge
@@ -198,7 +198,7 @@ python scripts/run_eval.py \
 Extraction only:
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/Geoaux
+cd /LatentGeo/Geoaux
 python scripts/run_eval.py \
   --input_file ./output/model_results.json \
   --step extract --no_llm
@@ -207,7 +207,7 @@ python scripts/run_eval.py \
 Scoring only:
 
 ```bash
-cd /Users/ethyl/code/LatentGeo/Geoaux
+cd /LatentGeo/Geoaux
 python scripts/run_eval.py \
   --input_file ./eval_results/extracted_answers.json \
   --step score --use_judge
