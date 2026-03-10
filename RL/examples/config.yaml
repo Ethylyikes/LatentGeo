@@ -1,0 +1,153 @@
+data:
+  # train_files: /hpc2hdd/home/yuxuanzhao/zihanwang/dataset/data/merged_train.json
+  # val_files: /hpc2hdd/home/yuxuanzhao/zihanwang/dataset/data/merged_val.json
+  # train_files: /hpc2hdd/home/yuxuanzhao/zihanwang/dataset/data/merged_train_mini_4k.json
+  # val_files: /hpc2hdd/home/yuxuanzhao/zihanwang/dataset/data/merged_val_mini_4k.json
+  train_files: /hpc2hdd/home/yuxuanzhao/zihanwang/dataset/data/traingeo_train.json
+  val_files:
+  prompt_key: problem
+  answer_key: answer
+  image_key: images
+  max_prompt_length: 4096
+  max_response_length: 2048
+  rollout_batch_size: 64
+  val_batch_size: 256
+  format_prompt: null
+  override_chat_template: null
+  shuffle: true
+  seed: 1
+  max_pixels: 3136000 # 2000 * 784
+  min_pixels: 262144 # 512 * 512
+  filter_overlong_and_invalid_prompts: false
+  train_max_samples: -1 #-1  # 128 for debugging, -1 for all data training
+  val_max_samples: -1 #-1  # 32 for debugging, -1 for all data validation
+
+algorithm:
+  adv_estimator: gdpo
+  disable_kl: false
+  use_kl_loss: true
+  kl_penalty: low_var_kl
+  kl_coef: 0.03
+  # kl_type: fixed
+  # kl_target: 1.0e-2
+  # kl_horizon: 10
+
+# algorithm:
+#   adv_estimator: gdpo
+#   disable_kl: false
+#   use_kl_loss: false
+#   kl_penalty: kl
+#   kl_coef: 0.03
+#   kl_type: fixed
+#   kl_target: 1.0e-2
+#   kl_horizon: 10
+
+worker:
+  actor:
+    # global_batch_size: 64 # 128
+    # micro_batch_size_per_device_for_update: 4
+    global_batch_size: 16 # 128
+    micro_batch_size_per_device_for_update: 2
+    micro_batch_size_per_device_for_experience: 8
+    max_grad_norm: 2.0
+    padding_free: true
+    ulysses_sequence_parallel_size: 1
+    model:
+      model_path: /hpc2hdd/home/yuxuanzhao/Xuhaiying/Mirage/checkpoints/MSE_29K_latentsize10_stage2
+      # model_path: /hpc2hdd/home/yuxuanzhao/zihanwang/latent/RL/checkpoints/easy_r1/latent_rl_run_temp0.1kl0.01/global_step_27/infer
+      torch_dtype: float16
+      enable_gradient_checkpointing: true
+      trust_remote_code: true
+      freeze_vision_tower: true
+    optim:
+      lr: 1.0e-7
+      weight_decay: 0
+      strategy: adamw  # {adamw, adamw_bf16}
+      lr_warmup_ratio: 0.15
+      # warmup_style: cosine
+    
+    fsdp:
+      enable_full_shard: true
+      enable_cpu_offload: false
+      enable_rank0_init: true
+      # Explicitly keep model weights in fp16 so FA2 can run
+      torch_dtype: float16
+    offload:
+      offload_params: true  # true: more CPU memory; false: more GPU memory
+      offload_optimizer: true  # true: more CPU memory; false: more GPU memory
+    # ref:
+    #   model:
+    #     torch_dtype: float16
+    
+
+  rollout:
+    n: 8
+    temperature: 0.9
+    top_p: 0.99
+    max_num_seqs: 128
+    gpu_memory_utilization: 0.55
+    enforce_eager: True
+    enable_chunked_prefill: false
+    tensor_parallel_size: 1
+    # vLLM will reject prompts with images if this is 0. Set to >=1 for MLLM.
+    limit_images: 4
+    sampling_strategy: greedy
+    repetition_penalty: 1 # stronger penalty to discourage repetition
+    val_override_config:
+      temperature: 1
+      top_p: 0.99
+      n: 1
+      logit_bias: null
+    dtype: float16
+
+
+  ref:
+    fsdp:
+      enable_full_shard: true
+      enable_cpu_offload: true  # true: more CPU memory; false: more GPU memory
+      enable_rank0_init: true
+      torch_dtype: float16
+    offload:
+      offload_params: false
+
+  reward:
+    reward_type: batch
+    reward_function: ./examples/reward_function/reward_v3.py:compute_score_wzh
+    reward_function_kwargs:
+      repetition_penalty_weight: 1.2
+      repetition_ngram_thresholds: {3: 0.18, 4: 0.12}
+      repetition_run_threshold: 6
+      repetition_max_penalty: 2
+      max_response_length: ${data.max_response_length}
+      # disable_latent: true
+      # disable_length: true
+
+  rule_based_judge:
+    judge_type: batch
+    judge_function: ./examples/reward_function/reward_v3.py:rule_then_api_batch_judge_wzh
+    api_name: gpt-4o-mini
+    api_kwargs:
+      temperature: 0.1
+  # rule_based_judge:
+  #     judge_type: batch
+  #     judge_function: ./examples/reward_function/wzh_reward_function.py:rule_only_batch_judge_wzh
+
+
+trainer:
+  total_epochs: 1
+  max_steps: null
+  project_name: easy_r1
+  experiment_name: qwen2_5_7b_RL
+  val_results_path: SFT_results.json
+  # val_results_path: RL_results.json
+  logger: ["console", "wandb"]
+  nnodes: 1
+  n_gpus_per_node: 4
+  val_freq: 1
+  val_before_train: true
+  val_only: true
+  val_generations_to_log: 10
+  save_freq: 1  # -1 to disable
+  save_limit: 100  # -1 to disable
+  save_checkpoint_path: null
+  load_checkpoint_path: null
