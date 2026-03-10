@@ -227,3 +227,14 @@ We thank the following excellent projects for their valuable contributions and i
 - [Monet](https://github.com/NOVAglow646/Monet)
 - [Mirage](https://github.com/UMass-Embodied-AGI/Mirage)
 - [MathCanvas](https://github.com/shiwk24/MathCanvas)
+
+## 📝 Citation
+If you find LatentGeo useful, please star and cite it:
+```bibtex
+@article{yuan2026bridging,
+title = {Bridging cognition and emotion: Empathy-driven multimodal misinformation detection},
+journal = {Information Fusion},
+volume = {132},
+pages = {104210},
+year = {2026},
+issn = {1566-2535},
