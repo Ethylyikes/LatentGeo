@@ -1,0 +1,10 @@
+[
+  {
+    "image_input": "images/example_question_image.jpg",
+    "image_output": "images/example_aux_image.jpg",
+    "text_input": "<image>\nQuestion: Solve this geometry problem.",
+    "aux_think": "Draw useful auxiliary lines and identify key geometric relations.",
+    "text_output": "The final answer is \\boxed{42}.",
+    "use_latent": true
+  }
+]
