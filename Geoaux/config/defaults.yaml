@@ -1,0 +1,10 @@
+benchmark_root: "."
+data_path: "./data/geoaux.json"
+output_dir: "./output"
+eval_output_dir: "./eval_results"
+world_size: 4
+
+api:
+  base_url: "your_api_base_url"
+  default_model: "qwen-plus"
+  num_workers: 16

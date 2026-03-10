@@ -1,0 +1,18 @@
+[
+  {
+    "index": 1,
+    "knowledge": "Euclidean Plane Geometry",
+    "subknowledge": "Triangles",
+    "correct_answer": "10",
+    "text_input": "In the figure, circle $O$ has radius $5$. Points $E$ and $F$ lie on the circle with $\triangle EOF$ central angle $\triangle EOF$ satisfying $\nabla$ actually: $\\angle EOF=60^\\circ$. A regular (equilateral) triangle $ABC$ is inscribed so that vertices $A$ and $B$ lie on the radii $OE$ and $OF$ respectively, point $C$ lies on the arc $EF$, and $AB\\perp OF$. Find the side length of $\\triangle ABC$.",
+    "image_input": "./data/image/example.png",
+    "aux_think": "Let the side length of the equilateral triangle $ABC$ be $x$. Drop the perpendicular from $C$ to $AB$ at $M$, so $CM\\perp AB$, and join $OC$.",
+    "Visual Operation": [
+      "Orthogonal & Parallel Alignment（1）",
+      "Structural Partitioning（1）"
+    ],
+    "question_type": "free-form",
+    "id": "geoaux_example_0001",
+    "image_output": "./data/image/solution_0.png"
+  }
+]
