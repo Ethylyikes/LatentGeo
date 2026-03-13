@@ -1,11 +1,11 @@
 # 🌍 LatentGeo: Learnable Auxiliary Constructions in Latent Space for Multimodal Geometric Reasoning
 
 <p align="center">
-📄 <a href="https://doi.org/10.1016/j.inffus.2026.104210">Paper</a> 
+📄 <a href="https://arxiv.org/abs/2603.12166">Paper</a> 
 &nbsp; | &nbsp;
 💻 <a href="https://github.com/Ethylyikes/LatentGeo/tree/main">Code</a>
 &nbsp; | &nbsp;
-🤗<a href="https://github.com/Ethylyikes/DAE">Benchmark</a>
+🤗<a href="https://huggingface.co/datasets/cyborvirtue/Geoaux">Benchmark</a>
 
 # 🔍 About LatentGeo
 We present LatentGeo, a novel framework that internalizes auxiliary geometric constructions as continuous latent visual representations, avoiding the computational overhead of explicit pixel-level rendering and the rigidity of external tools. To equip models with this capability, we design a three-stage curriculum learning strategy that progressively aligns and internalizes these spatial representations using auxiliary visual supervision. Furthermore, we introduce LaGDPO, a tailored latent-aware reinforcement learning procedure that stabilizes the latent visual reasoning process while directly optimizing end-task geometric correctness. Finally, to systematically evaluate models on these capabilities, we release GeoAux, a comprehensive new benchmark specifically targeting visually grounded geometry problems that require intermediate auxiliary constructions.
