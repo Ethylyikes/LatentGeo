@@ -231,10 +231,13 @@ We thank the following excellent projects for their valuable contributions and i
 ## 📝 Citation
 If you find LatentGeo useful, please star and cite it:
 ```bibtex
-@article{yuan2026bridging,
-title = {Bridging cognition and emotion: Empathy-driven multimodal misinformation detection},
-journal = {Information Fusion},
-volume = {132},
-pages = {104210},
-year = {2026},
-issn = {1566-2535},
+@misc{xu2026latentgeo,
+      title={LatentGeo: Learnable Auxiliary Constructions in Latent Space for Multimodal Geometric Reasoning},
+      author={Haiying Xu and Zihan Wang and Song Dai and Zhengxuan Zhang and Kairan Dou and Xuming Hu},
+      year={2026},
+      eprint={2603.12166},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2603.12166}, 
+}
+```
